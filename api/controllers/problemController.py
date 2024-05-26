@@ -1,18 +1,26 @@
 import os
 import yaml
 from scraping.problemScraper import getProblem
-from scraping.caches import problemCache, userCache
+from scraping.caches import problemCache
 
-def get_problem_json(problemId):
+def get_from_cache(problemId):
     if problemCache:
         problem = problemCache.get(problemId)
         if problem:
             return problem
-    
+        return None
+    return None
+
+
+def get_problem_json(problemId):
+    problem = get_from_cache(problemId)
+
+    if problem:
+        return problem
+
     problem, problemObject = getProblem(problemId)
     if problemObject:
         problemCache.add(problemObject)
-
 
     return problem
 
@@ -26,4 +34,14 @@ def get_problem_json_by_name(problemName):
                 "error": "Problem not yet discoverable by name. Please use the problemId instead.",
                 "info": "The api is user powered, so when when a user searches a problem by it's id, the problem is indexed by it's name. This way, the next user that searches for the problem by it's name will get the problemId."
             }   
-    return getProblem(problemId)
+        
+    problem = get_from_cache(problemId)
+
+    if problem:
+        return problem
+
+    problem, problemObject = getProblem(problemId)
+    if problemObject:
+        problemCache.add(problemObject)
+
+    return problem
