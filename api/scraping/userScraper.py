@@ -30,12 +30,9 @@ class User:
         self.__userData['corecte']  =   userStatisticsBlocks[1].text.strip()
         self.__userData['succes']   =   userStatisticsBlocks[2].text.strip()
 
+    def get_userName(self):
+        return self.__userName
 
-        
-
-        
-
-    
     def get_userData(self):
         return self.__userData
 

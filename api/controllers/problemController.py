@@ -1,9 +1,20 @@
 import os
 import yaml
 from scraping.problemScraper import getProblem
+from scraping.caches import problemCache, userCache
 
 def get_problem_json(problemId):
-    return getProblem(problemId)
+    if problemCache:
+        problem = problemCache.get(problemId)
+        if problem:
+            return problem
+    
+    problem, problemObject = getProblem(problemId)
+    if problemObject:
+        problemCache.add(problemObject)
+
+
+    return problem
 
 def get_problem_json_by_name(problemName):
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../scraping/problemIndexing.yaml"), "r") as f:

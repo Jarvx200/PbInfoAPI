@@ -102,6 +102,6 @@ def getProblem(problemId):
         print("Couldn't get problem")
         return None
 
-    return p.get_problem()
+    return p.get_problem(), p
 
 getProblem(2828)

@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from scraping.userScraper import getUser    
 
 users_bp = Blueprint('users', __name__, url_prefix='/users')
