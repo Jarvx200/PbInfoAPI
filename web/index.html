@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>PbInfo User Profile</title>
+</head>
+<style>
+    *{
+    font-family: "Reddit Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    }
+</style>
+<body class="m-0 p-0 bg-gray-800" onclick="fetchData()">
+    <div class="w-[100vw] h-[100vh] flex flex-col items-center p-10">
+        <h1 class="md:text-7xl text-4xl font-bold text-slate-100 w-50 text-center">PbInfo Profile Scout</h1>
+        <div class="w-[30%] h-0.5 bg-slate-100 mt-10"/>
+        <div class="relative mt-10 flex flex-row items-center justify-center w-full items-center">
+            <input class="mr-7 p-2 rounded-md bg-transparent border border-slate-300 text-slate-50" id="input"/>
+            <button class="ml-2 bg-slate-200 p-0.5 pl-3 pr-3 text-md rounded-md p-2 text-slate-800 hover:bg-opacity-50 transition-all" id="search"> Search </button>
+            
+        </div>
+        <div class="flex flex-col w-full justify-center items-center mt-20">
+            <div class="relative w-80 h-80 flex flex-row items-center justify-center"> 
+                <img id="pfp" class="w-64 h-64 bg-slate-800 rounded-md border" src="">
+                <img id="medal" class="absolute bottom-0 right-0 h-32 w-32 rounded-full border-2 bg-slate-700 " src=""/>
+            </div>
+            
+            <p class="mt-10 text-3xl font-bold text-slate-50" id="name">[NAME]</p>
+            <p class="mt-5 text-xl text-slate-50" id="username">[USERNAME]</p>
+            <div class="w-[27rem] h-20 mt-5 flex flex-line justify-center">
+                <p class="w-[9rem] h-20 mt-5 border flex flex-row items-center justify-center mr-5 text-slate-50" id="surse">[SURSE]</p>
+                <p class="w-[9rem] h-20 mt-5 border flex flex-row items-center justify-center mr-5 text-slate-50" id="probleme">[PROBLEME]</p>
+                <p class="w-[9rem] h-20 mt-5 border flex flex-line items-center justify-center mr-5 text-slate-50 " id="procente">[PROCENTE]</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const fetchData = async () => {
+        const response = await fetch('http://127.0.0.1:5000/users/' + document.getElementById('input').value);
+        if (!response.ok) {
+            console.error('HTTP error', response.status);
+        } else {
+            const userData = await response.json();
+            console.log(userData)
+            document.getElementById('pfp').src = userData.pfp;
+            document.getElementById('medal').src = userData.badge;
+            document.getElementById('name').innerText = userData.nume;
+            document.getElementById('username').innerText ="(" + userData.username + ")";
+            document.getElementById('surse').innerHTML = userData.trimise + `<svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-from-line"><path d="m18 9-6-6-6 6"/><path d="M12 3v14"/><path d="M5 21h14"/></svg>`;
+            document.getElementById('probleme').innerHTML = userData.corecte + `<svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>`;
+            document.getElementById('procente').innerHTML = userData.succes + ` <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-percent"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`;
+
+        }
+    }
+</script>
+</html>

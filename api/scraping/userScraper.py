@@ -30,6 +30,8 @@ class User:
         self.__userData['corecte']  =   userStatisticsBlocks[1].text.strip()
         self.__userData['succes']   =   userStatisticsBlocks[2].text.strip()
 
+        self.__userData['badge']    =   "https://www.pbinfo.ro/" + userData.find('img', width="107")['src']
+
     def get_userName(self):
         return self.__userName
 

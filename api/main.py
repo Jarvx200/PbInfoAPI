@@ -5,9 +5,11 @@ from routes.users import users_bp
 from scraping import caches
 
 app = Flask(__name__)
+CORS(app)
 
 app.register_blueprint(problems_bp)
 app.register_blueprint(users_bp)
+
 
 
 @app.route('/')
@@ -17,4 +19,3 @@ def running():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    caches.startCaches()
