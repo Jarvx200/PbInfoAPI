@@ -5,7 +5,9 @@ problems_bp = Blueprint('problems', __name__, url_prefix='/problems')
 
 @problems_bp.route('/<int:problemId>', methods=['GET'])
 def get_problem_by_id(problemId):
-    return problemController.get_problem_json(problemId)
+    problemJson = problemController.get_problem_json(problemId)
+    if problemJson : return problemJson 
+    else : return {"error": "Problem not found"}
 
 @problems_bp.route('/<string:problemName>', methods=['GET'])
 def get_problem_by_name(problemName):

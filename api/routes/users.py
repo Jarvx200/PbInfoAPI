@@ -5,5 +5,7 @@ users_bp = Blueprint('users', __name__, url_prefix='/users')
 
 @users_bp.route('/<string:userName>', methods=['GET'])
 def get_user(userName):
-    return getUser(userName)
+    user = getUser(userName)
+    if user : return user 
+    else : return {"error": "User not found"}
     
