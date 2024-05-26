@@ -48,9 +48,7 @@ def getUser(userName):
 
         u = User(soup, userName)
 
-        print(u.get_userData())
-
-        return u
+        return u.get_userData()
     else:
         print("Couldn't get user!")
         return None

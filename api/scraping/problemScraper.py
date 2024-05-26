@@ -38,10 +38,6 @@ class Problem:
         subKey = ""
         self.__problemObject[currentKey] = ''
 
-        
-        
-        
-
         for child in infoChildren:
             if child.name == 'h1':
                 currentKey = child.text
@@ -73,11 +69,6 @@ class Problem:
     def get_problemId(self):
         return self.__problemId
 
-        
-
-
-
-
 
 def getProblem(problemId):
     r = requests.get(PROBLEM_URL + str(problemId), headers=HEADERS)
@@ -87,13 +78,12 @@ def getProblem(problemId):
         
         if soup:
             p = Problem(soup, problemId)
-            print(p.get_problem())
         else:
             p = None
     else:
         print("Couldn't get problem")
         return None
 
-    return p
+    return p.get_problem()
 
 getProblem(2828)
