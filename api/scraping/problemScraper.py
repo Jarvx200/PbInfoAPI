@@ -1,7 +1,9 @@
 # TODO: Image handling
 
 import requests
+import yaml
 from bs4 import BeautifulSoup
+import os
 
 ### Constants ###
 
@@ -62,6 +64,21 @@ class Problem:
                 
                 elif child.name == 'pre':
                     self.__problemObject[currentKey][subKey] = child.text
+                    
+    def indexProblem(self):
+        with open(os.path.dirname(os.path.abspath(__file__)) + "/problemIndexing.yaml", "r") as f:
+            try:
+                pindexing_yaml = yaml.safe_load(f)
+                if self.__problemId not in pindexing_yaml:
+                    pindexing_yaml[self.__problemObject['name']] = self.__problemId
+                    with open(os.path.dirname(os.path.abspath(__file__)) + "/problemIndexing.yaml", 'w') as f:
+                        yaml.dump(pindexing_yaml, f)
+            except:
+                pindexing_yaml = {}
+                pindexing_yaml[self.__problemObject['name']] = self.__problemId
+                with open(os.path.dirname(os.path.abspath(__file__)) + "/problemIndexing.yaml", 'w') as f:
+                    yaml.dump(pindexing_yaml, f)
+                
 
     def get_problem(self):
         return self.__problemObject
@@ -78,6 +95,7 @@ def getProblem(problemId):
         
         if soup:
             p = Problem(soup, problemId)
+            p.indexProblem()
         else:
             p = None
     else:
