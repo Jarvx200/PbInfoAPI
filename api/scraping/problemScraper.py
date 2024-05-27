@@ -38,14 +38,16 @@ class Problem:
         infoChildren = problemInfo.find_all(recursive = False)   
         currentKey = "Pre Text"
         subKey = ""
-        self.__problemObject[currentKey] = ''
+        
 
         for child in infoChildren:
-            if child.name == 'h1':
+            if child.name in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
                 currentKey = child.text
                 self.__problemObject[currentKey] = ''
             elif child.name != 'ul' and (not "Exemplu" in currentKey):
                 try:
+                    if not self.__problemObject[currentKey]:
+                        self.__problemObject[currentKey] = ''
                     self.__problemObject[currentKey] += child.text
                 except:
                     continue
@@ -64,6 +66,10 @@ class Problem:
                 
                 elif child.name == 'pre':
                     self.__problemObject[currentKey][subKey] = child.text
+            if child.find('img') is not None:
+                if 'images' not in self.__problemObject or not self.__problemObject['images']:
+                    self.__problemObject['images'] = []
+                self.__problemObject['images'].append("https://www.pbinfo.ro" + child.find('img')['src'])
                     
     def indexProblem(self):
         with open(os.path.dirname(os.path.abspath(__file__)) + "/problemIndexing.yaml", "r") as f:
