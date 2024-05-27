@@ -17,12 +17,13 @@ def get_problem_json(problemId):
 
     if problem:
         return problem
-
-    problem, problemObject = getProblem(problemId)
-    if problemObject:
+    try:
+        problem, problemObject = getProblem(problemId)
         problemCache.add(problemObject)
 
-    return problem
+        return problem
+    except:
+        return None
 
 def get_problem_json_by_name(problemName):
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../scraping/problemIndexing.yaml"), "r") as f:

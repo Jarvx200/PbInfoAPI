@@ -46,8 +46,8 @@ def getUser(userName):
         soup = BeautifulSoup(r.content, "html.parser")
 
         u = User(soup, userName)
-
-        return u.get_userData()
+        
+        return u.get_userData(), u
     else:
         print("Couldn't get user!")
         return None
