@@ -29,7 +29,7 @@ For the data visualization page I used good ol' HTML and a little js for data fe
   * the problems can e searched by name only if they were previously indexed and searched by `id`
 
 ### Todo:
-  - [ ] Convert list caching to min-heap caching for problems
+  - [ ] Convert list caching to hashmap caching for problems
   - [ ] Add logging for all endpoints
   - [ ] Add admin dashboard to track usage
   - [ ] Implement key based authentication with keys that can expire/be left with no uses
