@@ -2,7 +2,7 @@
 ![copil-color-cool](https://github.com/Jarvx200/PbInfoAPI/assets/147537737/b3aec21d-7e51-47e7-9c35-4a83cd6f63d0)
 
 
-# Unofficial PbInfo API
+# Unofficial PbInfo (Webscraping) API
 
 This is a project attempting to be a user friendly way to geather **public available** data about user and problems of the programming website [PbInfo](www.pbinfo.ro), so they can be later used in other people's apps. \
 The project directory also includes a simple html frontent for easier testing for the `/users/` (data visualization).
