@@ -33,5 +33,5 @@ For the data visualization page I used good ol' HTML and a little js for data fe
   - [ ] Add logging for all endpoints
   - [ ] Add admin dashboard to track usage
   - [ ] Implement key based authentication with keys that can expire/be left with no uses
-  - [ ] Add requirements.txt
+  - [ x ] Add requirements.txt
 
